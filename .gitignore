@@ -1,0 +1,61 @@
+# ===========================
+# Java / Spring Boot (Backend)
+# ===========================
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.log
+*.tmp
+hs_err_pid*
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# ===========================
+# Node / Vue (Frontend)
+# ===========================
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# ===========================
+# Environment & Secrets
+# ===========================
+.env
+.env.*
+!.env.example
+
+# ===========================
+# Docker
+# ===========================
+.dockerenv
+
+# ===========================
+# IDEs & Editors
+# ===========================
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+*~
+
+# ===========================
+# OS Generated
+# ===========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===========================
+# Logs
+# ===========================
+logs/
+*.log
+npm-debug.log*

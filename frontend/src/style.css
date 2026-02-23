@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-spring-green: #6DB33F;
+  --color-spring-dark: #34302d;
+  --font-inter: "Inter", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+}
+
+:root {
+  --bg-color: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+}
+
+body {
+  @apply bg-[#050505] text-white font-inter;
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1d1d3d 0%, #050505 40%);
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-spring-green to-emerald-400;
+}
