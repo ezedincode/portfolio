@@ -1,3 +1,4 @@
+@config "../tailwind.config.js";
 @import "tailwindcss";
 
 @theme {
@@ -16,17 +17,27 @@
   --text-secondary: #a1a1aa;
 }
 
+html {
+  background-color: #ffffff;
+}
+
+html.dark {
+  background-color: #050505;
+  background-image: radial-gradient(circle at top left, #1d1d3d 0%, #050505 40%);
+  background-repeat: no-repeat;
+}
+
 body {
-  @apply bg-[#050505] text-white font-inter;
+  @apply text-zinc-900 dark:text-white font-inter;
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top left, #1d1d3d 0%, #050505 40%);
+  background-color: transparent;
 }
 
 .glass {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+  @apply bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl;
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-spring-green to-emerald-400;
+  @apply bg-clip-text text-transparent bg-linear-to-r from-spring-green to-emerald-400;
 }

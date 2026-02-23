@@ -1,14 +1,33 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { LucideGithub, LucideLinkedin, LucideExternalLink, LucideMail } from 'lucide-vue-next'
+import { LucideGithub, LucideLinkedin, LucideExternalLink, LucideMail, LucideMoon, LucideSun } from 'lucide-vue-next'
 import ProjectCard from './components/ProjectCard.vue'
 import SkillBadge from './components/SkillBadge.vue'
 
 const projects = ref([])
 
+const isDark = ref(document.documentElement.classList.contains('dark'))
+
+function applyTheme(dark) {
+  document.documentElement.classList.toggle('dark', dark)
+  localStorage.setItem('theme', dark ? 'dark' : 'light')
+}
+
+function toggleTheme() {
+  isDark.value = !isDark.value
+  applyTheme(isDark.value)
+}
+
 const skills = ['Spring Boot', 'Java 17', 'Vue 3', 'PostgreSQL', 'Docker', 'AWS', 'TypeScript', 'Vite', 'Pinia', 'Spring Security']
 
 onMounted(async () => {
+  // Keep in sync with the pre-hydration theme script in index.html
+  const storedTheme = localStorage.getItem('theme')
+  if (storedTheme === 'dark' || storedTheme === 'light') {
+    isDark.value = storedTheme === 'dark'
+    applyTheme(isDark.value)
+  }
+
   try {
     const response = await fetch('http://localhost:8080/api/projects')
     if (response.ok) {
@@ -40,14 +59,27 @@ onMounted(async () => {
 </script>
 
 <template>
-  <header class="glass fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[1100px] z-[1000] py-3 px-6">
+  <header class="glass fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-275 z-1000 py-3 px-6">
     <nav class="container mx-auto flex justify-between items-center">
       <div class="text-2xl font-extrabold font-outfit">Portfolio.</div>
-      <div class="hidden md:flex gap-8">
-        <a href="#projects" class="hover:text-spring-green transition-colors">Projects</a>
-        <a href="#skills" class="hover:text-spring-green transition-colors">Skills</a>
-        <a href="#about" class="hover:text-spring-green transition-colors">About</a>
-        <a href="#contact" class="hover:text-spring-green transition-colors">Contact</a>
+      <div class="flex items-center gap-4">
+        <div class="hidden md:flex gap-8">
+          <a href="#projects" class="hover:text-spring-green transition-colors">Projects</a>
+          <a href="#skills" class="hover:text-spring-green transition-colors">Skills</a>
+          <a href="#about" class="hover:text-spring-green transition-colors">About</a>
+          <a href="#contact" class="hover:text-spring-green transition-colors">Contact</a>
+        </div>
+
+        <button
+          type="button"
+          class="inline-flex items-center justify-center rounded-xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 backdrop-blur-xl transition-colors w-11 h-11"
+          :aria-label="isDark ? 'Switch to light mode' : 'Switch to night mode'"
+          :title="isDark ? 'Light mode' : 'Night mode'"
+          @click="toggleTheme"
+        >
+          <LucideSun v-if="isDark" :size="18" />
+          <LucideMoon v-else :size="18" />
+        </button>
       </div>
     </nav>
   </header>
@@ -58,9 +90,9 @@ onMounted(async () => {
         Available for Work
       </div>
       <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight font-outfit">
-        Building <span class="gradient-text">Premium</span> Full-Stack Solutions
+        Building <span class="text-spring-green">Premium</span> Full-Stack Solutions
       </h1>
-      <p class="text-xl text-zinc-400 max-w-2xl mx-auto mb-10">
+      <p class="text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-10">
         Specializing in Java/Spring Boot backends and modern Vue 3 frontends. 
         I bridge the gap between robust architecture and stunning user interfaces.
       </p>
@@ -68,7 +100,7 @@ onMounted(async () => {
         <button class="bg-spring-green hover:bg-spring-green/90 text-white px-8 py-3 rounded-xl font-bold transition-transform hover:-translate-y-1">
           View My Work
         </button>
-        <div class="flex gap-6 text-zinc-400">
+        <div class="flex gap-6 text-zinc-600 dark:text-zinc-400">
           <a href="#" class="hover:text-spring-green transition-colors"><LucideGithub /></a>
           <a href="#" class="hover:text-spring-green transition-colors"><LucideLinkedin /></a>
         </div>
@@ -78,7 +110,7 @@ onMounted(async () => {
     <section id="projects" class="mb-32">
       <div class="text-center mb-16">
         <h2 class="text-4xl font-bold mb-2 font-outfit">Featured Projects</h2>
-        <p class="text-zinc-400">A showcase of my recent technical work.</p>
+        <p class="text-zinc-600 dark:text-zinc-400">A showcase of my recent technical work.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <ProjectCard v-for="project in projects" :key="project.id" :project="project" />
@@ -95,7 +127,7 @@ onMounted(async () => {
     <footer id="contact" class="glass text-center py-16 px-8 mb-16">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-4xl font-bold mb-4 font-outfit">Let's build something together</h2>
-        <p class="text-zinc-400 mb-8">Currently looking for new opportunities in Full-Stack Development.</p>
+        <p class="text-zinc-600 dark:text-zinc-400 mb-8">Currently looking for new opportunities in Full-Stack Development.</p>
         <a href="mailto:hello@example.com" class="inline-flex items-center gap-2 bg-spring-green text-white px-8 py-3 rounded-xl font-semibold hover:-translate-y-1 transition-transform">
           <LucideMail :size="20" /> Get In Touch
         </a>
