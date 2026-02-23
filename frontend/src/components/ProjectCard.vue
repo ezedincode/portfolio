@@ -12,7 +12,7 @@ defineProps({
 <template>
   <div class="glass flex flex-col h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-spring-green/50">
     <div v-if="project.imageUrl" class="h-48 bg-cover bg-center border-b border-black/10 dark:border-white/10" :style="{ backgroundImage: `url(${project.imageUrl})` }"></div>
-    <div v-else class="h-48 bg-radial from-spring-green/10 to-zinc-100 dark:from-spring-green/20 dark:to-zinc-900 flex items-center justify-center border-b border-black/10 dark:border-white/10">
+    <div v-else class="h-48 bg-zinc-100 dark:bg-white/5 flex items-center justify-center border-b border-black/10 dark:border-white/10">
       <div class="text-spring-green opacity-40">
         <LucideExternalLink :size="48" />
       </div>

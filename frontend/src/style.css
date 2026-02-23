@@ -18,13 +18,11 @@
 }
 
 html {
-  background-color: #ffffff;
+  background-color: #fafafb;
 }
 
 html.dark {
-  background-color: #050505;
-  background-image: radial-gradient(circle at top left, #1d1d3d 0%, #050505 40%);
-  background-repeat: no-repeat;
+  background-color: #2b3130;
 }
 
 body {
@@ -36,8 +34,4 @@ body {
 
 .glass {
   @apply bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl;
-}
-
-.gradient-text {
-  @apply bg-clip-text text-transparent bg-linear-to-r from-spring-green to-emerald-400;
 }
