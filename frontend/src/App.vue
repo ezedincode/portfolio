@@ -2,8 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { LucideGithub, LucideLinkedin, LucideExternalLink, LucideMail, LucideMoon, LucideSun } from 'lucide-vue-next'
 import ProjectCard from './components/ProjectCard.vue'
-
-const projects = ref([])
+import SkillBadge from './components/SkillBadge.vue'
+import { downloadCV } from '../storage/storage.js'
 
 const profile = {
   name: 'Ezedin Ahmed',
@@ -15,6 +15,46 @@ const profile = {
   githubHandle: '@ezedincode',
   githubUrl: 'https://github.com/ezedincode'
 }
+
+const featuredProjects = [
+  {
+    id: 1,
+    title: 'Bookstore Backend (Intern Project)',
+    description: 'Spring Boot backend with PostgreSQL, JWT authentication, REST APIs, and role-based access control for Admin and User features. Containerized with Docker for consistent deployment.',
+    tags: 'Spring Boot, PostgreSQL, JWT, Docker',
+    githubUrl: profile.githubUrl
+  },
+  {
+    id: 2,
+    title: 'School Grade Management System',
+    description: 'Distributed school management system using Java and Spring Cloud microservices with API Gateway routing, Kafka messaging, automated notifications, and Swagger API documentation.',
+    tags: 'Java, Spring Cloud, API Gateway, Kafka',
+    githubUrl: profile.githubUrl
+  },
+  {
+    id: 3,
+    title: 'HTTP Servlet Server',
+    description: 'Lightweight multi-threaded HTTP server built from scratch in Java with a custom request dispatcher, JSON body parsing, and a controller annotation system for concurrent client connections.',
+    tags: 'Java, HTTP, Multithreading, JSON',
+    githubUrl: profile.githubUrl
+  },
+  {
+    id: 4,
+    title: 'Load Balancer',
+    description: 'Java-based load balancer that distributes incoming HTTP traffic across multiple backend servers using algorithms like Round Robin and health monitoring for improved fault tolerance.',
+    tags: 'Java, Load Balancing, HTTP, Monitoring',
+    githubUrl: profile.githubUrl
+  },
+  {
+    id: 5,
+    title: 'E-commerce Microservices',
+    description: 'Microservices-based e-commerce system built with Spring Boot, separate services for core functions, service discovery, and an API Gateway via Spring Cloud for a scalable architecture.',
+    tags: 'Spring Boot, Microservices, Spring Cloud, Discovery',
+    githubUrl: profile.githubUrl
+  }
+]
+
+const projects = ref(featuredProjects)
 
 const education = {
   degree: 'Computer Engineering',
@@ -52,6 +92,14 @@ function toggleTheme() {
   applyTheme(isDark.value)
 }
 
+async function handleDownloadResume() {
+  try {
+    await downloadCV()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 const skillsByCategory = [
   {
     title: 'Language',
@@ -83,59 +131,12 @@ const skillsByCategory = [
   }
 ]
 
-onMounted(async () => {
+onMounted(() => {
   // Keep in sync with the pre-hydration theme script in index.html
   const storedTheme = localStorage.getItem('theme')
   if (storedTheme === 'dark' || storedTheme === 'light') {
     isDark.value = storedTheme === 'dark'
     applyTheme(isDark.value)
-  }
-
-  try {
-    const response = await fetch('http://localhost:8080/api/projects')
-    if (response.ok) {
-      projects.value = await response.json()
-    }
-  } catch (error) {
-    console.error('Failed to fetch projects:', error)
-    // Fallback data if backend is not running
-    projects.value = [
-      {
-        id: 1,
-        title: 'Bookstore Backend (Intern Project)',
-        description: 'Spring Boot backend with PostgreSQL, JWT authentication, REST APIs, and role-based access control for Admin and User features. Containerized with Docker for consistent deployment.',
-        tags: 'Spring Boot, PostgreSQL, JWT, Docker',
-        githubUrl: profile.githubUrl
-      },
-      {
-        id: 2,
-        title: 'School Grade Management System',
-        description: 'Distributed school management system using Java and Spring Cloud microservices with API Gateway routing, Kafka messaging, automated notifications, and Swagger API documentation.',
-        tags: 'Java, Spring Cloud, API Gateway, Kafka',
-        githubUrl: profile.githubUrl
-      },
-      {
-        id: 3,
-        title: 'HTTP Servlet Server',
-        description: 'Lightweight multi-threaded HTTP server built from scratch in Java with a custom request dispatcher, JSON body parsing, and a controller annotation system for concurrent client connections.',
-        tags: 'Java, HTTP, Multithreading, JSON',
-        githubUrl: profile.githubUrl
-      },
-      {
-        id: 4,
-        title: 'Load Balancer',
-        description: 'Java-based load balancer that distributes incoming HTTP traffic across multiple backend servers using algorithms like Round Robin and health monitoring for improved fault tolerance.',
-        tags: 'Java, Load Balancing, HTTP, Monitoring',
-        githubUrl: profile.githubUrl
-      },
-      {
-        id: 5,
-        title: 'E-commerce Microservices',
-        description: 'Microservices-based e-commerce system built with Spring Boot, separate services for core functions, service discovery, and an API Gateway via Spring Cloud for a scalable architecture.',
-        tags: 'Spring Boot, Microservices, Spring Cloud, Discovery',
-        githubUrl: profile.githubUrl
-      }
-    ]
   }
 })
 </script>
@@ -184,6 +185,13 @@ onMounted(async () => {
         <a href="#projects" class="bg-spring-green hover:bg-spring-green/90 text-white px-8 py-3 rounded-xl font-bold transition-transform hover:-translate-y-1">
           View My Work
         </a>
+        <button
+          type="button"
+          class="border border-spring-green/30 text-spring-green px-8 py-3 rounded-xl font-bold transition-transform hover:-translate-y-1 hover:bg-spring-green/10"
+          @click="handleDownloadResume"
+        >
+          Download Resume
+        </button>
         <div class="flex gap-6 text-zinc-600 dark:text-zinc-400">
           <a :href="profile.githubUrl" target="_blank" rel="noreferrer" class="hover:text-spring-green transition-colors" :aria-label="'GitHub ' + profile.githubHandle" :title="profile.githubHandle">
             <LucideGithub />
@@ -216,13 +224,7 @@ onMounted(async () => {
         >
           <h3 class="text-xl font-bold mb-4 font-outfit">{{ category.title }}</h3>
           <div class="flex flex-wrap gap-2">
-            <span
-              v-for="item in category.items"
-              :key="item"
-              class="text-xs px-3 py-1 bg-spring-green/10 text-spring-green rounded-full font-semibold"
-            >
-              {{ item }}
-            </span>
+            <SkillBadge v-for="item in category.items" :key="item" :name="item" />
           </div>
         </div>
       </div>
