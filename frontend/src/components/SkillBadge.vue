@@ -2,7 +2,10 @@
 import { computed } from 'vue'
 import {
   siApachekafka,
+  siApachemaven,
   siDocker,
+  siGit,
+  siHtml5,
   siJavascript,
   siJsonwebtokens,
   siJunit5,
@@ -15,6 +18,8 @@ import {
   siSpring,
   siSpringboot,
   siSpringsecurity,
+  siTailwindcss,
+  siVite,
   siVuedotjs
 } from 'simple-icons'
 
@@ -31,8 +36,12 @@ const ICONS_BY_SKILL = {
   'Spring Cloud': siSpring,
   'Spring Security': siSpringsecurity,
   'JWT authentication': siJsonwebtokens,
-  'JavaScript': siJavascript,
+  'REST APIs': siSpring,
+  JavaScript: siJavascript,
+  'HTML/CSS': siHtml5,
   'Vue.js': siVuedotjs,
+  'Tailwind CSS': siTailwindcss,
+  Vite: siVite,
   PostgreSQL: siPostgresql,
   MySQL: siMysql,
   MongoDB: siMongodb,
@@ -40,6 +49,8 @@ const ICONS_BY_SKILL = {
   Redis: siRedis,
   RabbitMQ: siRabbitmq,
   Docker: siDocker,
+  Git: siGit,
+  Maven: siApachemaven,
   'JUnit 5': siJunit5,
   Mockito: null
 }

@@ -10,12 +10,16 @@ defineProps({
 </script>
 
 <template>
-  <div class="glass flex flex-col h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-spring-green/50">
-    <div v-if="project.imageUrl" class="h-48 bg-cover bg-center border-b border-black/10 dark:border-white/10" :style="{ backgroundImage: `url(${project.imageUrl})` }"></div>
-    <div v-else class="h-48 bg-zinc-100 dark:bg-white/5 flex items-center justify-center border-b border-black/10 dark:border-white/10">
+  <div class="glass flex flex-col h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-spring-green/50 group">
+    <div v-if="project.imageUrl" class="relative h-48 border-b border-black/10 dark:border-white/10 overflow-hidden">
+      <img :src="project.imageUrl" :alt="project.title" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:opacity-0"></div>
+    </div>
+    <div v-else class="relative h-48 bg-zinc-100 dark:bg-white/5 flex items-center justify-center border-b border-black/10 dark:border-white/10 overflow-hidden group">
       <div class="text-spring-green opacity-40">
         <LucideExternalLink :size="48" />
       </div>
+      <div class="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:opacity-0"></div>
     </div>
     <div class="p-6 grow flex flex-col">
       <h3 class="text-xl font-bold mb-3 font-outfit">{{ project.title }}</h3>
