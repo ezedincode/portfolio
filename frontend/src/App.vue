@@ -108,9 +108,9 @@ function toggleTheme() {
   applyTheme(isDark.value)
 }
 
-async function handleDownloadResume() {
+function handleDownloadResume() {
   try {
-    await downloadCV()
+    downloadCV()
   } catch (error) {
     console.error(error)
   }
