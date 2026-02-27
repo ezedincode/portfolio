@@ -22,7 +22,10 @@ defineProps({
       <div class="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:opacity-0"></div>
     </div>
     <div class="p-6 grow flex flex-col">
-      <h3 class="text-xl font-bold mb-3 font-outfit">{{ project.title }}</h3>
+      <h3 class="text-xl font-bold mb-1 font-outfit">{{ project.title }}</h3>
+      <p v-if="project.category" class="text-[11px] font-semibold text-spring-green uppercase tracking-[0.15em] mb-3">
+        {{ project.category }}
+      </p>
       <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6 grow">{{ project.description }}</p>
       <div class="flex flex-wrap gap-2 mb-6">
         <span v-for="tag in project.tags?.split(',')" :key="tag" class="text-[10px] px-3 py-1 bg-spring-green/10 text-spring-green rounded-full font-bold uppercase tracking-wider">

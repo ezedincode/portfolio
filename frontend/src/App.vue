@@ -48,6 +48,7 @@ const featuredProjects = [
     id: 1,
     title: 'Online Bookstore',
     description: 'Full-stack web application with a Vue.js frontend and Spring Boot backend. Features PostgreSQL database, JWT authentication, REST APIs, role-based access control for Admin and User, and Docker containerization for consistent deployment.',
+    category: 'Full Stack Application',
     tags: 'Vue.js, Spring Boot, PostgreSQL, JWT, Docker',
     githubUrl: 'https://github.com/ezedincode/online-book-store',
     imageUrl: bookStoreImg
@@ -56,6 +57,7 @@ const featuredProjects = [
     id: 2,
     title: 'School Grade Management System',
     description: 'Distributed school management system using Java and Spring Cloud microservices with API Gateway routing, Kafka messaging, automated notifications, and Swagger API documentation.',
+    category: 'Microservices',
     tags: 'Java, Spring Cloud, API Gateway, Kafka',
     githubUrl: 'https://github.com/ezedincode/school-grade-management-system',
     imageUrl: gradePilotImg
@@ -64,6 +66,7 @@ const featuredProjects = [
     id: 3,
     title: 'HTTP Servlet Server',
     description: 'Lightweight multi-threaded HTTP server built from scratch in Java with a custom request dispatcher, JSON body parsing, and a controller annotation system for concurrent client connections.',
+    category: 'Developer Tool',
     tags: 'Java, HTTP, Multithreading, JSON',
     githubUrl: 'https://github.com/ezedincode/http-servlet-server',
     imageUrl: httpServletImg
@@ -72,6 +75,7 @@ const featuredProjects = [
     id: 4,
     title: 'Load Balancer',
     description: 'Java-based load balancer that distributes incoming HTTP traffic across multiple backend servers using algorithms like Round Robin and health monitoring for improved fault tolerance.',
+    category: 'Infrastructure / Tool',
     tags: 'Java, Load Balancing, HTTP, Monitoring',
     githubUrl: 'https://github.com/ezedincode/loadbalancer',
     imageUrl: loadBalancerImg
@@ -80,6 +84,7 @@ const featuredProjects = [
     id: 5,
     title: 'E-commerce Microservices',
     description: 'Microservices-based e-commerce system built with Spring Boot, separate services for core functions, service discovery, and an API Gateway via Spring Cloud for a scalable architecture.',
+    category: 'Microservices',
     tags: 'Spring Boot, Microservices, Spring Cloud, Discovery',
     githubUrl: 'https://github.com/ezedincode/ecommerce-microservice',
     imageUrl: ecommerceImg
@@ -210,9 +215,9 @@ onMounted(() => {
       </h1>
       <div class="text-lg font-semibold text-spring-green mb-4">{{ profile.title }} — Spring Boot & Vue.js</div>
       <p class="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-        I like building things that work well behind the scenes — APIs, microservices,
-        the stuff that keeps apps running smooth. I also enjoy putting together clean UIs
-        with Vue.js. Basically, I'm into the whole journey from database to browser.
+        I build robust backend services with Spring Boot and also have a strong understanding of modern frontend
+        development using Vue.js and Tailwind CSS. I enjoy creating clean, responsive interfaces and reliable APIs —
+        taking care of the whole journey from database to browser.
       </p>
       <div class="flex flex-col md:flex-row justify-center items-center gap-8">
         <a href="#projects" class="bg-spring-green hover:bg-spring-green/90 text-white px-8 py-3 rounded-xl font-bold transition-transform hover:-translate-y-1">
