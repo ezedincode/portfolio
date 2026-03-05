@@ -1,4 +1,4 @@
-const CV_URL = '/CV%20.pdf'
+const CV_URL = `${import.meta.env.BASE_URL}CV.pdf`
 
 export function downloadCV() {
     // Open the PDF from the public directory in the browser's built-in PDF viewer
