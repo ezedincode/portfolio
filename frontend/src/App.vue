@@ -36,7 +36,7 @@ const profile = {
   name: 'Ezedin Ahmed',
   title: 'Full Stack Developer',
   email: 'ezedinadefa@gmail.com',
-  location: 'Dessie, Ethiopia',
+  location: 'Addis Ababa, Ethiopia',
   phone: '+251964240012',
   nationality: 'Ethiopian',
   githubHandle: '@ezedincode',
